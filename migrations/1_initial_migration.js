@@ -1,4 +1,4 @@
-const Migrations = artifacts.require("LotteryPool");
+const Migrations = artifacts.require("LotteryTicket");
 
 module.exports = function (deployer) {
   deployer.deploy(Migrations);
