@@ -30,6 +30,10 @@ contract LotteryFactory {
   function getLotteries() view public returns (Lottery[] memory) {
     return lotteries;
   }
+
+  function getLottery(uint _id) view public returns (Lottery memory) {
+    return lotteries[_id];
+  }
 }
 
 contract LotteryTicket is LotteryFactory {
@@ -55,6 +59,7 @@ contract LotteryTicket is LotteryFactory {
     Lottery storage lottery = lotteries[_lotteryId];
     require(msg.value == lottery.ticketPrice);
     require(!lottery.completed);
+    ticketHolders[_lotteryId][lottery.ticketHolderCount] = payable(msg.sender);
     lottery.ticketHolderCount++;
     if (lottery.ticketHolderCount == lottery.size) {
       uint winnerId = _electWinner(lottery);
