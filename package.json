@@ -1,0 +1,29 @@
+{
+  "name": "blockchain-developer-bootcamp-final-project",
+  "version": "1.0.0",
+  "description": "## What does the project do? The project will open a \"lottery pool\" for two users to join. To join a \"lottery pool\", users will have to stake a certain (pre-defined) amount of ETH. Once two users have joined the pool, the app will \"flip a coin\" and transfer the staked ETH to the winning address.",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.3.2",
+    "@truffle/hdwallet-provider": "^1.5.1",
+    "dotenv": "^10.0.0",
+    "web3": "^1.6.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tARIFToW/blockchain-developer-bootcamp-final-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tARIFToW/blockchain-developer-bootcamp-final-project/issues"
+  },
+  "homepage": "https://github.com/tARIFToW/blockchain-developer-bootcamp-final-project#readme"
+}

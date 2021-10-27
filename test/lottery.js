@@ -55,4 +55,11 @@ contract("LotteryTicket", async (accounts) => {
       const lottery = await lotteryContract.getLottery(1);
       assert.equal(lottery.completed, true);
     })
+
+    it("should transfer the correct amounts", async () => {
+      const lotteryContract = await LotteryTicket.deployed();
+      const winnerAddress = await lotteryContract.getTicketHolders(1)[0];
+      const winningAddressBalance = await Web3.eth.getBalance(winnerAddress);
+      assert.equal(winningAddressBalance, Web3.utils.toWei('3.7', 'ether'));
+    })
 });
