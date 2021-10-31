@@ -11,6 +11,7 @@
     "@truffle/hdwallet-provider": "^1.5.1",
     "@web3-react/core": "^6.1.9",
     "dotenv": "^10.0.0",
+    "styled-components": "^5.3.3",
     "web3": "^1.6.0"
   },
   "devDependencies": {},
