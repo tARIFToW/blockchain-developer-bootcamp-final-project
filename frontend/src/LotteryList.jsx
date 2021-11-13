@@ -7,7 +7,7 @@ const Item = styled.span`
 `;
 
 const LotteryItem = ({title, value}) => {
-  return (<Item>{title}: {value}</Item>)
+  return (<Item><b>{title}</b>: {value}</Item>)
 }
 
 const Lottery = ({ lottery, active, contract }) => {
