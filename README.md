@@ -1,11 +1,21 @@
 # blockchain-developer-bootcamp-final-project
 
 ## What does the project do?
-The project will open a "lottery pool" for two users to join. To join a "lottery pool", users will have to stake a certain (pre-defined) amount of ETH. Once two users have joined the pool, the app will "flip a coin" and transfer the staked ETH to the winning address.
+The project lets users create lotteries for a provided number of participants and ticket price. The creators of a lottery will earn a share of the lottery proceeds as an incentive to create and market further lotteries. Participating users have the option of buying lottery tickets for a given price. Once the required number of participants for a given lottery is reached a ticket holder will be selected at random and will receive the funds paid into the lottery.
+
+The randomness for electing a lottery winner is achieved using the Chainlink VRFConsumerBase oracle.
+
+The contract has been deployed to the Rinkeby testnet.
 
 ## Workflow
-1. Stake ETH
-2. Wait (until a second user joins)
-3. a) Win and get all staked funds b) Lose and lose your staked funds
+1. Create Lottery
+2. Buy Lottery ticket
+3. Get a certain number of participants to join your lottery
 
-This idea can be extended to larger lottery pools to amplify risk-reward profile.
+## Accessing the frontend
+You can access the frontend here.
+
+## Getting started
+To install the local dependencies run `npm install` in both the `root` and `frontend` directory of the project. To run the frontend, call `npm start` in the `frontend` directory.
+
+To run the contract tests, run `ganache-cli` and `truffle test` in the root directory.
