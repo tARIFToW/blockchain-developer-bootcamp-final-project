@@ -11,7 +11,7 @@ function getLibrary(provider) {
 }
 
 const App = () => {
-  const { active, account, library, connector, activate, deactivate } = useWeb3React()
+  const { active, account, activate } = useWeb3React()
   const [lotteries, setLotteries] = useState([]);
   const connect = async () => {
     try {
@@ -36,6 +36,30 @@ const App = () => {
     }
     fetchLotteries();
   }, [getLotteries]);
+
+  useEffect(() => {
+    const fetchLotteries = async() => {
+      await getLotteries();
+    }
+
+    if (active) {
+      contract.contract.events.NewLottery().on("data", (e) => {
+        fetchLotteries()
+      })
+      contract.contract.events.NewTicketPurchase().on("data", (e) => {
+        fetchLotteries()
+      })
+      contract.contract.events.NewWinner().on("data", (e) => {
+        fetchLotteries()
+      })
+    }
+
+    return () => {
+      contract.contract.events.NewLottery().unsubscribe()
+      contract.contract.events.NewTicketPurchase().unsubscribe()
+      contract.contract.events.NewWinner().unsubscribe()
+    }
+  }, [account])
   
   return (
     <div>

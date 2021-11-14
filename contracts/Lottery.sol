@@ -4,6 +4,9 @@ pragma solidity >=0.8.0;
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@chainlink/contracts/src/v0.8/VRFConsumerBase.sol";
 
+// @title A Factory of Lotteries (to be inherited by the LotteryTicket contract)
+// @author Alexander Wiederin
+// @notice this contract has not been throughly tested and may contain security issues if used on mainnet
 abstract contract LotteryFactory is VRFConsumerBase {
 
   bytes32 internal keyHash;
@@ -13,6 +16,8 @@ abstract contract LotteryFactory is VRFConsumerBase {
   using SafeMath for uint;
 
   event NewLottery(uint lotteryId, string name);
+  event NewTicketPurchase(uint lotteryId);
+  event NewWinner(uint lotteryId, address winner);
 
   constructor()
     VRFConsumerBase(
@@ -84,6 +89,7 @@ abstract contract LotteryFactory is VRFConsumerBase {
 contract LotteryTicket is LotteryFactory {
 
   function _electWinner() internal returns (bytes32 requestId) {
+    require(LINK.balanceOf(address(this)) >= fee, "Not enough LINK - fill contract with faucet");
     return requestRandomness(keyHash, fee);
   }
 
@@ -95,6 +101,7 @@ contract LotteryTicket is LotteryFactory {
     lottery.winner = winnerAddress;
     _transferFundsToWinner(lottery, winnerAddress);
     _transferFundsToOwner(lottery);
+    emit NewWinner(lotteryId, winnerAddress);
   }
 
   function _transferFundsToWinner(Lottery memory _lottery, address payable _winnerAddress) internal {
@@ -112,10 +119,10 @@ contract LotteryTicket is LotteryFactory {
   function buyTicket(uint _lotteryId) public payable {
     Lottery storage lottery = lotteries[_lotteryId];
     require(msg.value == lottery.ticketPrice);
-    require(LINK.balanceOf(address(this)) >= fee, "Not enough LINK - fill contract with faucet");
     require(!lottery.completed);
     ticketHolders[_lotteryId].push(payable(msg.sender));
     lottery.ticketHolderCount++;
+    emit NewTicketPurchase(lottery.id);
     if (lottery.ticketHolderCount == lottery.size) {
       lottery.completed = true;
       bytes32 requestId = _electWinner();
