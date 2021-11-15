@@ -16,6 +16,6 @@ The contract has been deployed to the Rinkeby testnet.
 You can access the frontend here.
 
 ## Getting started
-To install the local dependencies run `npm install` in both the `root` and `frontend` directory of the project. To run the frontend, call `npm start` in the `frontend` directory.
+To install the local dependencies run `npm install` in both the `root` and `frontend` directory of the project. To run the frontend, call `npm run start` in the `frontend` directory.
 
 To run the contract tests, run `ganache-cli` and `truffle test` in the root directory.
