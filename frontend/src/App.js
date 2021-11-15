@@ -26,16 +26,18 @@ const App = () => {
   }, [account])
 
   const getLotteries = useCallback(async() => {
-    const lotteries = await contract.getLotteries();
-    setLotteries(lotteries);
-  }, [contract])
+    if (active) {
+      const lotteries = await contract.getLotteries();
+      setLotteries(lotteries);
+    }
+  }, [contract, active])
 
   useEffect(() => {
     const fetchLotteries = async() => {
       await getLotteries();
     }
     fetchLotteries();
-  }, [getLotteries]);
+  }, [getLotteries, active]);
 
   useEffect(() => {
     const fetchLotteries = async() => {
@@ -59,11 +61,12 @@ const App = () => {
       contract.contract.events.NewTicketPurchase().unsubscribe()
       contract.contract.events.NewWinner().unsubscribe()
     }
-  }, [account])
+  }, [account, active, contract, getLotteries])
   
   return (
     <div>
-      <button onClick={connect} >Connect</button>
+      <button onClick={connect} >Connect to Rinkeby</button>
+      {" "}
       {active ? <span>Connected with: <b>{account}</b></span> : <span>Not connected</span>}
       <LotteryList active={active} lotteries={lotteries} contract={contract}/>
       {active ? <LotteryCreator contract={contract}/> : null}
