@@ -9,7 +9,7 @@ import "@chainlink/contracts/src/v0.8/VRFConsumerBase.sol";
 /// @notice this contract has not been throughly tested and may contain security issues if used on mainnet
 abstract contract LotteryFactory is VRFConsumerBase {
 
-  /// @notice the following three state variables are used for the VRFConsumerBase contract
+  /// @dev the following three state variables are used for the VRFConsumerBase contract
   bytes32 internal keyHash;
   uint256 internal fee;
   uint256 public randomResult;
@@ -56,7 +56,7 @@ abstract contract LotteryFactory is VRFConsumerBase {
     address winner;
   }
 
-  /// @notice List of all lotteries created 
+  /// @dev List of all lotteries created 
   Lottery[] lotteries;
   /// @dev used to find the address of winning ticketholders
   mapping(uint => address payable[]) ticketHolders;
