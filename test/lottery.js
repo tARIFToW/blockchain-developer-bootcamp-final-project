@@ -9,12 +9,15 @@ const LotteryTicket = artifacts.require("LotteryTicket");
 contract("LotteryTicket", async (accounts) => {
   const web3 = new Web3("http://127.0.0.1:8545");
   LotteryTicket.defaults({ gasPrice: 0 });
+
+  // ensures that there are no boilerplate lotteies when the contract is deployed
   it("should have no lotteries when deployed", async () => {
     const lotteryContract = await LotteryTicket.deployed();
     const lotteries = await lotteryContract.getLotteries();
     return assert.equal(0, lotteries.length);
   })
 
+  // ensures that users can create lotteries
   it("should create a new lottery", async () => {
     const lotteryContract = await LotteryTicket.deployed();
     await lotteryContract.createLottery("test", 2, Web3.utils.toWei('1', 'ether'), 10);
@@ -22,6 +25,7 @@ contract("LotteryTicket", async (accounts) => {
     return assert.equal(1, lotteries.length);
   })
 
+  // ensures that there can be multiple lotteries at the same time
   it("should be able to create 2 lotteries", async () => {
     const lotteryContract = await LotteryTicket.deployed();
     await lotteryContract.createLottery("test 2", 3, Web3.utils.toWei('1', 'ether'), 10, {from: accounts[1]});
@@ -29,6 +33,7 @@ contract("LotteryTicket", async (accounts) => {
     return assert.equal(2, lotteries.length);
   })
 
+  // ensures that the getLotteries function retrieves the correct lottery
   it("should get the correct lottery", async () => {
     const lotteryContract = await LotteryTicket.deployed();
     const lottery = await lotteryContract.getLottery(1);
@@ -40,6 +45,7 @@ contract("LotteryTicket", async (accounts) => {
     assert.equal(lottery.completed, false);
     })
 
+    // ensures that the ticketHoldersCount for a lottery increases, which ultimately ensures that the lottery eventually completes
     it("should increase the ticketHolderCount and balance", async () => {
       const lotteryContract = await LotteryTicket.deployed();
       await lotteryContract.buyTicket(1, {value: Web3.utils.toWei('1', 'ether'), from: accounts[2] });
