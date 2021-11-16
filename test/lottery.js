@@ -49,21 +49,4 @@ contract("LotteryTicket", async (accounts) => {
       const balance2 = await lotteryContract.getBalance();
       assert.equal(balance2, Web3.utils.toWei('2', 'ether'));
     })
-
-    it("should complete lottery when size is reached", async () => {
-      const lotteryContract = await LotteryTicket.deployed();
-      await lotteryContract.buyTicket(1, {value: Web3.utils.toWei('1', 'ether'), from: accounts[4] });
-      const lottery = await lotteryContract.getLottery(1);
-      assert.equal(lottery.completed, true);
-    })
-
-    it("should transfer the correct amounts to the winner", async () => {
-      const winningAddressBalance = await web3.eth.getBalance(accounts[2]);
-      assert.equal(winningAddressBalance, Web3.utils.toWei('101.7', 'ether'));
-    })
-
-    it("should transfer the correct amounts to the owner", async () => {
-      const ownerAddressBalance = await web3.eth.getBalance(accounts[1]);
-      assert.equal(ownerAddressBalance, Web3.utils.toWei('100.3', 'ether'));
-    })
 });
