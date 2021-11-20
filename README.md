@@ -13,7 +13,9 @@ The contract has been deployed to the Rinkeby testnet.
 3. Get a certain number of participants to join your lottery
 
 ## Accessing the frontend
-You can access the frontend here.
+You can access the frontend [here](https://tariftow.github.io/blockchain-developer-bootcamp-final-project/).
+
+:warning: **Make sure you are connecting a rinkeby wallet**: Be very careful here!
 
 ## Getting started
 To install the local dependencies run `npm install` in both the `root` and `frontend` directory of the project. To run the frontend, call `npm run start` in the `frontend` directory.
