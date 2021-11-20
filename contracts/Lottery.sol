@@ -140,7 +140,7 @@ contract LotteryTicket is LotteryFactory {
   function fulfillRandomness(bytes32 requestId, uint256 randomness) internal override {
     uint256 lotteryId = requestIdToLotteryId[requestId];
     Lottery storage lottery = lotteries[lotteryId];
-    uint winnerId = SafeMath.add(SafeMath.mod(randomness, lottery.size), 1);
+    uint winnerId = SafeMath.mod(randomness, lottery.size);
     address payable winnerAddress = _getWinnerAddress(lottery.id, winnerId);
     lottery.winner = winnerAddress;
     _transferFundsToWinner(lottery, winnerAddress);
