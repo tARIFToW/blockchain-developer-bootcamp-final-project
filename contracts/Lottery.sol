@@ -65,11 +65,19 @@ abstract contract LotteryFactory is VRFConsumerBase {
   /// @dev used in the Chainlink fullfillRandomness callback
   mapping(bytes32 => uint256) requestIdToLotteryId;
 
+  /// @dev size must be larger than 1
+  /// @dev ownerCommission can not be larger than 100 to prevent an attack on balance
+  modifier isValidLottery(uint _size, uint _ownerCommission) {
+    require(_size > 1);
+    require(_ownerCommission < 100);
+    _;
+  }
+
   /// @param _name given name of contract
   /// @param _size required possible seats on contract
   /// @param _ticketPrice price for each ticket in the lottery
   /// @param _ownerCommission commission to the lottery creator once lottery has been completed
-  function createLottery(string memory _name, uint _size, uint _ticketPrice, uint _ownerCommission) public {
+  function createLottery(string memory _name, uint _size, uint _ticketPrice, uint _ownerCommission) public isValidLottery(_size, _ownerCommission) {
     lotteries.push(Lottery(lotteryCount, _name, _size, _ticketPrice, 0, false, payable(msg.sender), _ownerCommission, address(0)));
     lotteryCount++;
     emit NewLottery(lotteryCount, _name);
@@ -169,6 +177,7 @@ contract LotteryTicket is LotteryFactory {
   /// @param _lotteryId Id of lottery that a ticket should be purchased for
   function buyTicket(uint _lotteryId) public payable {
     Lottery storage lottery = lotteries[_lotteryId];
+    require(lottery.owner != address(0));
     require(msg.value == lottery.ticketPrice);
     require(!lottery.completed);
     ticketHolders[_lotteryId].push(payable(msg.sender));
