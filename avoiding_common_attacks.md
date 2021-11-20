@@ -1,6 +1,6 @@
 # Common Attack Protection Measures
 
-# [CWE-330: Weak Sources of Randomness from Chain Attributes](https://swcregistry.io/docs/SWC-120)
+# [SWC-120: Weak Sources of Randomness from Chain Attributes](https://swcregistry.io/docs/SWC-120)
 
 Through integration with Chainlink's **VRFConsumerBase** `requestRandomness` feature we have averted the risk of insufficiently random numbers when electing a lottery winner. 
 
