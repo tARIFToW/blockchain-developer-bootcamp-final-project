@@ -54,7 +54,7 @@ export const LotteryCreator = ({contract}) => {
             {errors.size && touched.size && errors.size}
           </Item>
           <Item>
-            <Title>Price:</Title>
+            <Title>Price (Ether):</Title>
             <input 
               type="number"
               name="price"
