@@ -35,7 +35,7 @@ const Lottery = ({ lottery, active, contract }) => {
       <LotteryItem title={'Price (Ether)'} value={Web3.utils.fromWei(ticketPrice.toString(), "ether")} />
       <LotteryItem title={'Owner Commission (%)'} value={ownerCommission} />
       <LotteryItem title={'Completed'} value={completed.toString()} />
-      <LotteryItem title={'Winner'} value={winner} />
+      {completed && (<LotteryItem title={'Winner'} value={winner} />)}
       {active && !completed ? <button onClick={handleBuyTicket}>buy ticket</button> : null}
     </ItemList>
   )

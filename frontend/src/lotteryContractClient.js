@@ -4,7 +4,7 @@ import {abi} from './abi.js';
 export class LotteryContractClient {
   constructor (account){
     this.web3 = new Web3(window.ethereum)
-    this.contract = new this.web3.eth.Contract(abi, '0x4D5E0F9AEdce4633AA8D2b11A998E8d2F928C977') 
+    this.contract = new this.web3.eth.Contract(abi, '0x8e56F69c9f3fE4Eb30b6A62c01Ab4E947E831E3F') 
     this.account = account;
   }
 
