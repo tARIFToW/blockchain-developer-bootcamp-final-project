@@ -20,4 +20,7 @@ You can access the frontend [here](https://tariftow.github.io/blockchain-develop
 ## Getting started
 To install the local dependencies run `npm install` in both the `root` and `frontend` directory of the project. To run the frontend, call `npm run start` in the `frontend` directory.
 
-To run the contract tests, run `ganache-cli` and `truffle test` in the root directory.
+To run the contract tests, run `ganache-cli` (host: `127.0.0.1` port: `8545`) and `truffle test` in the root directory.
+
+## Directory Structure
+The contract code and the associated infrastructure can be found in the `root` of the repo. The frontend source code can be in the `frontend` directory.
