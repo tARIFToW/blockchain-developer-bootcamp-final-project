@@ -24,4 +24,4 @@ To run the contract tests, run `ganache-cli` (host: `127.0.0.1` port: `8545`) an
 
 ## Directory Structure
 The contract code and the associated infrastructure can be found in the `root` of the repo. The frontend source code can be in the `frontend` directory.
-# My Ethereum address is 0xBFdDB0906E960c1B3D965B6bd291208E8C5bbaD1
+### My Ethereum address is 0xBFdDB0906E960c1B3D965B6bd291208E8C5bbaD1
