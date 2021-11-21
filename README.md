@@ -13,7 +13,7 @@ The contract has been deployed to the Rinkeby testnet.
 3. Get a certain number of participants to join your lottery
 
 ## Accessing the frontend
-You can access the frontend [here](https://tariftow.github.io/blockchain-developer-bootcamp-final-project/).
+You can access the frontend [here](https://tariftow.github.io/blockchain-developer-bootcamp-final-project/). To view a screencast [visit](https://drive.google.com/file/d/1bNsSN-SJnogjmFn4Rdxc0Ffk-mtSWdpP/view?usp=sharing)
 
 :warning:  **Make sure you are connecting a rinkeby wallet**: Be very careful here!
 
